@@ -1,0 +1,71 @@
+<view style="height: 100vh;">
+    <view class="cu-card dynamic no-card" style="height: 100%;">
+        <view class="cu-item "
+              style="background:#f6f9ff;height: 100%;display: flex;flex-direction: column;justify-content: space-between;">
+            <view style="overflow:scroll;">
+            <!--头像行-->
+            <view class="cu-list menu-avatar">
+                <view class="cu-item" style="background:#f6f9ff;">
+                    <view bindtap='navToOrg'
+                          class="cu-avatar round lg" style="background-image:url({{avatar}});">
+                    </view>
+                    <view class="content flex-sub">
+                        <view class="text-black">{{name}}</view>
+                        <view class="text-gray text-sm flex justify-between">
+                            {{date}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+
+            <!--正文行-->
+            <view class="text-content margin-lr"
+                  style="flex-grow: 1;max-height: initial;overflow: scroll;">
+
+                <view class="text-black">
+                    <text class="text-orange margin-right-xs" selectable='true'>#{{title}}#</text>
+                    <text class="text-black" selectable='true'>{{content}}</text>
+                </view>
+
+                <view wx:if="{{images}}">
+                    <block wx:for="{{images}}">
+                        <image src="{{item}}" mode="widthFix"></image>
+                    </block>
+                </view>
+            </view>
+
+            <!--图片行-->
+            <view class="margin-top margin-lr">
+
+                    <view class="grid col-{{colNum}} grid-square flex-sub">
+                        <view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage"
+                              data-url="{{imgList[index]}}">
+                            <image src='{{imgList[index]}}' mode='aspectFill'></image>
+
+                        </view>
+
+                    </view>
+
+            </view>
+            </view>
+
+
+
+            <!--点赞行-->
+            <view class="bg-white solid-top text-gray text-lg text-right padding myicons">
+                <view>
+                    <text class="cuIcon-attentionfill lg margin-lr-xs "></text>
+                </view>
+                <text class="lg margin-right-xs">{{viewNum}}</text>
+                <view bindtap="addGood" data-actid="{{id}}" data-isgood='{{isgood}}' data-appnum="{{appNum}}">
+                    <text class="cuIcon-appreciatefill lg margin-lr-xs {{isgood==='null' || isgood === null?  'text-gray': 'text-yellow'}}"></text>
+                </view>
+                <text class="lg margin-right-xs">{{appNum}}</text>
+                <view bindtap="addColl" data-actid="{{id}}" data-iscollection='{{iscollection}}'  data-favornum="{{favorNum}}">
+                    <text class="cuIcon-favorfill lg margin-lr-xs {{iscollection==='null'|| iscollection === null?  'text-gray' : 'text-yellow'}}"></text>
+                </view>
+                <text class="lg margin-right-xs">{{favorNum}}</text>
+            </view>
+        </view>
+    </view>
+</view>

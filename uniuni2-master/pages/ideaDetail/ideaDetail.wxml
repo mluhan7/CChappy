@@ -1,0 +1,46 @@
+<view style="height: 100vh;">
+    <view class="cu-card dynamic no-card" style="height: 100%;">
+        <view class="cu-item shadow"
+              style="background:#f6f9ff;height: 100%;display: flex;flex-direction: column;justify-content: space-between;">
+            <view style="overflow:scroll;" class="margin-lr">
+            <!--标题行-->
+            <view class="text-xl padding-bottom">
+                <view class="text-black text-bold" selectable='true'>{{title}}</view>
+            </view>
+
+            <!--正文行-->
+            <view class="text-content"
+                  style="flex-grow: 1;max-height: initial;overflow: scroll;">
+                <!--正文-->
+                <view class="text-black">
+                    <!--                    <text class="text-green margin-right-xs">#{{title}}#</text>-->
+                    <text class="text-black" selectable='true'>{{content}}</text>
+                </view>
+                <!--@-->
+                <scroll-view scroll-x>
+                    <view class="cu-btn sm round line-{{colors[index]}} margin-right-df padding-tb-xs mytag"
+                          wx:for="{{orgs}}" wx:for-item="org">
+                        <text class="text-sm text-{{colors[index]}}">@{{org}}</text>
+                    </view>
+                </scroll-view>
+            </view>
+            <!--图片-->
+            <!--图片行-->
+            <view class="margin-top">
+
+                    <view class="grid col-{{colNum}} grid-square flex-sub">
+                        <view class="bg-img" wx:for="{{images}}" wx:key="{{index}}" bindtap="ViewImage"
+                              data-url="{{images[index]}}">
+                            <image src='{{images[index]}}' mode='aspectFill'></image>
+
+                        </view>
+
+                    </view>
+
+            </view>
+            </view>
+        </view>
+
+
+    </view>
+</view>

@@ -1,0 +1,92 @@
+<!--pages/freeroom/freeroom.wxml-->
+<view class="my-bg-white" style="height:100vh;overflow:scroll;">
+    <!--选项-->
+    <view class="padding solid-bottom">
+        <view class="flex-row">
+            <view class="padding-sm margin-xs radius text-bold selectTitle">教学楼</view>
+            <view class="myflex-row">
+                <view wx:for="{{b1list}}"
+                      style="{{index === id1 ? 'background-color: #0285f9;': 'background-color: #e1e5ef;color:#333333'}}"
+                      class="text-white myflex-row padding-sm margin-xs radius"
+                      bindtap='changeB1' data-msg="{{item}}" data-id="{{index}}">{{item}}</view>
+            </view>
+        </view>
+
+        <view class="flex-row">
+            <view class="padding-sm margin-xs radius text-bold selectTitle">楼栋</view>
+            <view class="myflex-row">
+                <view wx:for="{{b2list}}"
+                      wx:if="{{B2selectable}}"
+                      style="{{index == id2 ? 'background-color: #0285f9;': 'background-color: #e1e5ef;color:#333333'}}"
+                      class="text-white myflex-row padding-sm margin-xs radius"
+                      bindtap='changeB2' data-msg="{{item}}" data-id="{{index}}">{{item}}</view>
+            </view>
+        </view>
+
+        <view class="flex-row">
+            <view class="padding-sm margin-xs radius text-bold selectTitle">楼层 </view>
+            <view class="myflex-row">
+                <view wx:for="{{b3list}}"
+                      wx:if="{{index !== 4 || f5selectable === true}}"
+                      style="{{index === id3 ? 'background-color: #0285f9;': 'background-color: #e1e5ef;color:#333333'}}"
+                      class="text-white myflex-row padding-sm margin-xs radius"
+                      bindtap='changeB3' data-msg="{{item}}" data-id="{{index}}">{{item}}</view>
+            </view>
+        </view>
+
+        <view class="flex flex-direction">
+            <button class='cu-btn bg-gradual-blue  shadow margin-tb-sm lg'
+                    style="width:100%;"
+                    bindtap="access">搜索空教室</button>
+        </view>
+    </view>
+
+    <!--课表-->
+    <scroll-view class='padding-lr '>
+        <!--提示-->
+        <view class="cu-bar my-bg-white">
+            <view class="action"
+            style="justify-content: space-between;width:100%;">
+                <view>
+                    <text class="cuIcon-title text-red"></text>
+                    <text class="text-bold text-red"> {{date}}</text>
+                </view>
+                <view>
+                    <text class="text-bold text-blue">蓝色</text>表示空闲哟
+                </view>
+
+            </view>
+        </view>
+        <!--教室id-->
+        <view class='swaper-tt flex-row'>
+            <view class='left'>
+                <view class='title text-bold'>教室</view>
+                <view class="room text-blue" wx:for="{{roomli}}">{{item}}</view>
+            </view>
+
+            <view class='right'>
+                <view class='title'>
+                    <view wx:for="{{['1~2','3~4','5~6','7~8','9~11']}}" class='text-bold t-item'>{{item}}节</view>
+                </view>
+                <view class='flex body-courseli'>
+                    <view wx:for="{{courseli}}" wx:for-item="first" class="line">
+                        <view class='flex-row'>
+                            <view wx:for="{{first}}" wx:for-item="second" class='c-common shadow free{{second}}'></view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+
+    <view class="padding">
+        <picker mode="date" value="{{date}}" start="{{start}}" end="{{end}}" bindchange="bindDateChange">
+            <view class="flex flex-direction">
+                <button class='cu-btn bg-gradual-blue  shadow margin-tb-sm lg'
+                        style="width:100%;"
+                        bindtap="access">更改日期，重新获取</button>
+            </view>
+        </picker>
+
+    </view>
+</view>

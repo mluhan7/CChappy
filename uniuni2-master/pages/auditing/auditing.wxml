@@ -1,0 +1,211 @@
+<view class='flex-mid topbar' style="height:10vh">
+  <text wx:for="{{toptab}}" class="tabtitle {{currentTab==index ? 'select-t' : ''}}"
+        bindtap="changetab" data-id="{{index}}"
+  >{{item}}</text>
+</view>
+
+<swiper current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:90vh">
+  <!--topbar高35px-->
+  <!--搜课程-->
+  <swiper-item style="overflow:scroll">
+    <!--（上）搜索-->
+    <view class='wrapper_s'>
+      <form bindsubmit='course_formSubmit' class='form flex-mid'>
+        <view class='wrapper_input'>
+          <view class="iconfont icon-sousuo-tianchong icon_s"></view>
+          <input type='text' name="keyword" class='input_search' placeholder='输入课程名搜索' value='{{s1_inputs}}' />
+        </view>
+        <button form-type='submit' class='btn_search'>搜索</button>
+      </form>
+    </view>
+    <!--搜索结果-->
+    <scroll-view style="height: {{tbodyHeight-35-55}}px" scroll-y scroll-with-animation>
+      <!--wrapper_s占据55px-->
+      <view>
+        <!--显示搜索结果-->
+        <block wx:if="{{reshow == 1}}">
+          <block wx:for="{{results}}" wx:key="res">
+            <view class='wrapper-inv flex-mid'>
+              <view class='res'>
+                <view class='line1'>
+                  <text class='major'>{{item.major}}</text>
+                  <text class="tname">{{item.tname}}</text>
+                </view>
+
+                <view class='line2'><text class='cname'>{{item.cname}}</text></view>
+
+                <view class='line3'>
+                  <view class='l3-left'>
+                    <view wx:for="{{item.class_time_detail}}" wx:for-item="detail">
+                      <text>{{detail}}</text>
+                    </view>
+                  </view>
+                  <view class='l3-right'>
+                    <view wx:for="{{item.site_name_detail}}" wx:for-item="detail">
+                      <text>{{detail}}</text>
+                    </view>
+                  </view>
+                  
+                </view>
+
+              </view>
+
+            </view>
+          </block>
+        </block>
+
+        <!--没有结果-->
+        <block wx:elif="{{reshow == 2}}">
+          <view class='flex-mid noresult'>
+            <text class='t-gray'>无匹配结果</text>
+          </view>
+        </block>
+
+        <!--没有搜索-->
+        <block wx:else>
+          <view class='flex-mid notSearch'>
+            <text class='t-gray'>请搜索你感兴趣的课程</text>
+          </view>
+        </block>
+
+      </view>
+    </scroll-view>
+  </swiper-item>
+
+  <!--搜专业-->
+  <swiper-item style="overflow:scroll">
+    <!--（上）搜索-->
+    <view class='wrapper_s'>
+      <form bindsubmit='major_formSubmit' class='form flex-mid'>
+        <view class='wrapper_input'>
+          <view class="iconfont icon-sousuo-tianchong icon_s"></view>
+          <input type='text' name="keyword" class='input_search' placeholder='输入专业名搜索' value='{{s2_inputs}}'/>
+        </view>
+        <button form-type='submit' class='btn_search'>搜索</button>
+      </form>
+    </view>
+    <!--搜索结果-->
+    <scroll-view style="height: {{tbodyHeight-35-55}}px" scroll-y scroll-with-animation>
+      <!--wrapper_s占据55px-->
+      <view>
+        <!--显示搜索结果-->
+        <block wx:if="{{reshow == 1}}">
+          <block wx:for="{{results}}" wx:key="res">
+            <view class='wrapper-inv flex-mid'>
+              <view class='res'>
+                <view class='line1'>
+                  <text class='major'>{{item.major}}</text>
+                  <text class="tname">{{item.tname}}</text>
+                </view>
+
+                <view class='line2'><text class='cname'>{{item.cname}}</text></view>
+
+                <view class='line3'>
+                  <view class='l3-left'>
+                    <view wx:for="{{item.class_time_detail}}" wx:for-item="detail">
+                      <text>{{detail}}</text>
+                    </view>
+                  </view>
+                  <view class='l3-right'>
+                    <view wx:for="{{item.site_name_detail}}" wx:for-item="detail">
+                      <text>{{detail}}</text>
+                    </view>
+                  </view>
+                  
+                </view>
+
+              </view>
+
+            </view>
+          </block>
+        </block>
+
+        <!--没有结果-->
+        <block wx:elif="{{reshow == 2}}">
+          <view class='flex-mid noresult'>
+            <text class='t-gray'>无匹配结果</text>
+          </view>
+        </block>
+
+        <!--没有搜索-->
+        <block wx:else>
+          <view class='flex-mid notSearch'>
+            <text class='t-gray'>请搜索你感兴趣的专业</text>
+          </view>
+        </block>
+
+
+      </view>
+    </scroll-view>
+    
+  </swiper-item>
+
+  <!--搜老师-->
+  <swiper-item style="overflow:scroll">
+    <!--（上）搜索-->
+    <view class='wrapper_s'>
+      <form bindsubmit='teacher_formSubmit' class='form flex-mid'>
+        <view class='wrapper_input'>
+          <view class="iconfont icon-sousuo-tianchong icon_s"></view>
+          <input type='text' name="keyword" class='input_search' placeholder='输入老师名搜索' value='{{s3_inputs}}'/>
+        </view>
+        <button form-type='submit' class='btn_search'>搜索</button>
+      </form>
+    </view>
+    <!--搜索结果-->
+    <scroll-view style="height: {{tbodyHeight-35-55}}px" scroll-y scroll-with-animation>
+      <!--wrapper_s占据55px-->
+      <view>
+        <!--显示搜索结果-->
+        <block wx:if="{{reshow == 1}}">
+          <block wx:for="{{results}}" wx:key="res">
+            <view class='wrapper-inv flex-mid'>
+              <view class='res'>
+                <view class='line1'>
+                  <text class='major'>{{item.major}}</text>
+                  <text class="tname">{{item.tname}}</text>
+                </view>
+
+                <view class='line2'><text class='cname'>{{item.cname}}</text></view>
+
+                <view class='line3'>
+                  <view class='l3-left'>
+                    <view wx:for="{{item.class_time_detail}}" wx:for-item="detail">
+                      <text>{{detail}}</text>
+                    </view>
+                  </view>
+                  <view class='l3-right'>
+                    <view wx:for="{{item.site_name_detail}}" wx:for-item="detail">
+                      <text>{{detail}}</text>
+                    </view>
+                  </view>
+                  
+                </view>
+
+              </view>
+
+            </view>
+          </block>
+        </block>
+
+        <!--没有结果-->
+        <block wx:elif="{{reshow == 2}}">
+          <view class='flex-mid noresult'>
+            <text class='t-gray'>无匹配结果</text>
+          </view>
+        </block>
+
+        <!--没有搜索-->
+        <block wx:else>
+          <view class='flex-mid notSearch'>
+            <text class='t-gray'>请搜索你感兴趣的老师</text>
+          </view>
+        </block>
+
+
+      </view>
+    </scroll-view>
+    
+    
+  </swiper-item>
+</swiper>

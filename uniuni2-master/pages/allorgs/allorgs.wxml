@@ -1,0 +1,50 @@
+<!--搜索栏-->
+<!--<view class="cu-bar my-bg-white search">-->
+<!--    <view class="search-form radius">-->
+<!--        <text class="cuIcon-search"></text>-->
+<!--        <input type="text" placeholder="搜索组织" confirm-type="search" class="bg-gray"></input>-->
+<!--    </view>-->
+<!--    <view class="action">-->
+<!--        <text class="cuIcon-close"></text>-->
+<!--        <text>清空</text>-->
+<!--    </view>-->
+<!--</view>-->
+
+<view class="VerticalBox">
+    <!--VerticalNav-->
+    <scroll-view class="VerticalNav nav solid-right" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh);background:#f6f9ff;">
+        <view class="cu-item {{index==TabCur?'text-orange cur':''}}" wx:for="{{list}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+            <view class="text-cut cu-item-text">
+                {{item.name}}
+            </view>
+        </view>
+    </scroll-view>
+
+    <!--VerticalMain-->
+    <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh)" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
+        <view class="padding-top padding-lr-sm" wx:for="{{list}}" wx:key id="main-{{index}}">
+            <!--块标题-->
+            <view class='cu-bar solid-bottom'>
+                <view class='action'>
+                    <text class='cuIcon-title text-orange'></text>{{item.name}}</view>
+            </view>
+            <!--块内容-->
+            <block wx:for='{{item.orgs}}' wx:for-item='org'>
+                <view class="cu-list menu-avatar bg-white shadow-lg" bindtap="navToOrg"
+                data-orgid="{{org.orgid}}" data-avatar="{{org.avatar}}">
+                    <view class="cu-item ">
+                        <view class="cu-avatar round lg" style="background-image:url({{org.avatar}});"></view>
+                        <view class="content">
+                            <view class="text-grey text-title">{{org.name}}</view>
+                            <view class="text-gray text-sm flex">
+                                <text class="text-cut text-motto">
+                                    {{org.motto}}
+                                </text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </scroll-view>
+</view>

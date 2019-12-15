@@ -1,0 +1,16 @@
+<view wx:if="{{show}}">
+    <view wx:if="{{canIUse}}">
+
+
+        <view class='content flex-sub text-center'>
+            <view class="solid-bottom text-xl padding">uni有你申请获取以下权限</view>
+            <text class="text-black text-bold">获得你的公开信息(昵称，头像等)</text>
+        </view>
+
+        <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
+            授权登录
+        </button>
+    </view>
+
+    <view wx:else>请升级QQ版本</view>
+</view>

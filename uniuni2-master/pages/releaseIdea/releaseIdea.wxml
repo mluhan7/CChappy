@@ -1,0 +1,71 @@
+<view style="height:100vh;overflow:hidden;">
+    <!--上面-->
+    <view style="height:20vh;" class="myhint">
+        <view style="height:100%;" class="text-gray text-sm margin-right-lg margin-top-sm">*提示：可@多个社团组织</view>
+    </view>
+
+    <!--下面-->
+    <view style="height:80vh;position:relative;" class="bg-white mypaper">
+        <!--发送-->
+        <view bindtap='submit' style="" class="myfasong-wraper">
+            <view class="shadow myfasong text-center" style="background:#3ad29f;">
+                <text class="iconfont icon-fasong text-white lg" style="font-size:55rpx;"></text>
+            </view>
+        </view>
+
+        <!--标题-->
+        <view class="padding-lr padding-bottom-sm">
+        <input class="text-black text-lg text-bold text-center" placeholder="私信标题"
+               bindinput="get_title" style="height:80rpx;"></input>
+        </view>
+
+        <!--补充-->
+        <view class="padding-lr">
+            <textarea bindinput	="getTextareaInput" value="{{text}}" auto-height placeholder="私信只有被你@的社团组织才能收到哦~另外，私信不会向接收方公开你的身份，如有必要请记得在正文补充您的联系方式~（最大长度1000字）" class="mytextarea" maxlength="1000"/>
+        </view>
+
+        <!--@和图片-->
+        <view class="cu-bar flex margin-lr justify-between" style="overflow:hidden;">
+            <view class="margin-right-sm text-xl text-bold" bindtap="select">
+                <text class="text-red">@</text>
+            </view>
+            <scroll-view scroll-x="true" style="white-space: nowrap;" class="padding-right-lg">
+                <view wx:for="colors" class="cu-btn sm round line-{{colors[index]}} margin-right-df padding-tb-xs mytag"
+                      wx:for="{{select_type}}" wx:for-item="org">
+                    <text class="  text-sm text-{{colors[index]}}">@{{org.orgname}}</text>
+                    <text class="text-sm text-red iconfont icon-shanchu mydelete"
+                          bindtap="deleteAt"
+                          data-atindex="{{index}}"></text>
+                </view>
+            </scroll-view>
+        </view>
+
+
+        <view>
+            <view class="cu-bar bg-white">
+                <view class="action">
+                    添加图片
+                </view>
+                <view class="action">
+                    {{imgList.length}}/9
+                </view>
+            </view>
+            <scroll-view scroll-y='true' class="cu-form-group padding-top-sm padding-bottom-lg" style="max-height:420rpx;">
+                <view class="grid col-3 grid-square flex-sub">
+                    <view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage"
+                          data-url="{{imgList[index]}}">
+                        <image src='{{imgList[index]}}' mode='aspectFill'></image>
+                        <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+                            <text class="cuIcon-close"></text>
+                        </view>
+                    </view>
+                    <view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<9}}">
+                        <text class="cuIcon-cameraadd"></text>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+
+
+    </view>
+</view>

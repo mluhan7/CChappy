@@ -1,0 +1,125 @@
+<view style="height:100vh;overflow:hidden;">
+<view id="topBar">
+<view style="background:#f6f9ff;">
+    <view class="UCenter-bg">
+        <view class="cu-avatar round avatar" style="background-image:url({{org.avatar}});"></view>
+        <view class="text-xl margin-top-xs margin-bottom-xs">
+            {{org.name}}
+        </view>
+        <view class="text-sm margin-bottom-sm">
+            {{org.motto}}
+        </view>
+
+        <!--    <image src="http://www.triple2.xyz:8088/wave.gif" mode="scaleToFill" class="gif-wave margin-top-lg"></image>-->
+    </view>
+</view>
+
+        <!--浏览量、收藏量、点赞量-->
+<view class="padding-top-sm flex text-center text-grey bg-white shadow-warp">
+    <view class="flex flex-sub flex-direction solid-right">
+        <view class="text-xxl text-orange">{{visitTotal}}</view>
+        <view style="margin-top:16rpx;" class="text-sm">
+            <text class="cuIcon-attentionfill"></text>
+            浏览
+        </view>
+    </view>
+    <view class="flex flex-sub flex-direction solid-right">
+        <view class="text-xxl text-blue">{{starCount}}</view>
+        <view style="margin-top:16rpx;" class="text-sm">
+            <text class="cuIcon-favorfill"></text>
+            收藏
+        </view>
+    </view>
+    <view class="flex flex-sub flex-direction">
+        <view class="text-xxl text-green">{{watchCount}}</view>
+        <view class="margin-top-sm">
+            <button bindtap="setFollow"
+                    class="cu-btn  shadow round padding-xs {{followed?'bg-gray':'bg-yellow'}} {{followed?'text-black':'text-white'}}"
+                    style="width: 180rpx; position: relative; top: -18rpx;">
+
+                <text class="cuIcon-noticefill"></text>
+                {{followed?'取消':''}}关注
+            </button>
+        </view>
+    </view>
+</view>
+</view>
+
+        <!--动态页面-->
+<scroll-view scroll-y='true' style="height:{{scrollViewHeight}}px" enable-back-to-top="true">
+    <block wx:if="{{cards.length !== 0}}">
+        <block wx:for='{{cards}}' wx:for-item="card">
+            <view class="cu-card dynamic padding-bottom-lg padding-top-xs">
+                <view class="cu-item myshadow">
+                    <view class="cu-list menu-avatar">
+                        <view class="cu-item">
+                            <view
+                                    class="cu-avatar round lg" style="background-image:url({{card.avatar}});"></view>
+                            <view class="content flex-sub">
+                                <view class="text-black">{{card.name}}</view>
+                                <view class="text-gray text-sm flex justify-between">
+                                    {{card.date}}
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+
+                    <view class="text-content" bindtap="navToActDetail"
+                          data-actid="{{card.id}}"
+                          data-orgname="{{card.name}}"
+                          data-avatar="{{card.avatar}}"
+                          data-date="{{card.date}}"
+                          data-title="{{card.title}}"
+                          data-content="{{card.content}}"
+                          data-viewnum='{{card.viewNum}}'
+                          data-appnum='{{card.appNum}}'
+                          data-favornum='{{card.favorNum}}'
+                          data-isgood='{{card.isgood}}'
+                          data-iscollection='{{card.iscollection}}'
+                          data-index='{{index}}'
+
+                    >
+
+                        <view class="multi-ellipsis--l4 text-black">
+                            <text class="text-orange margin-right-xs">#{{card.title}}#</text>
+                            <text class="text-black">{{card.content}}</text>
+                        </view>
+                    </view>
+                    <view
+                          wx:if='{{card.images[0]}}'
+                          class="grid flex-sub padding-lr col-{{card.colNum}} grid-square">
+                        <view class="bg-img" wx:for='{{card.images}}' style="background-image:url({{item}});">
+                        </view>
+                    </view>
+
+                    <view class="my-text-gray text-right padding myicons"
+                          style="font-size:32rpx;padding:8rpx 30rpx 10rpx 0;line-height:40rpx;">
+                        <view>
+                            <text class="cuIcon-attentionfill lg margin-lr-xs {{card.apped ? 'text-yellow': ''}}"></text>
+                        </view>
+                        <text class="lg margin-right-xs text-sm">{{card.viewNum}}</text>
+                        <view bindtap="addGood" data-actid="{{card.id}}" data-isgood='{{card.isgood}}'
+                              data-index="{{index}}" data-appnum="{{card.appNum}}">
+                            <text class="cuIcon-appreciatefill lg margin-lr-xs {{card.isgood? 'text-yellow': 'my-text-gray'}}"></text>
+                        </view>
+                        <text class="lg margin-right-xs text-sm">{{card.appNum}}</text>
+                        <view bindtap="addColl" data-actid="{{card.id}}" data-iscollection='{{card.iscollection}}'
+                              data-index="{{index}}" data-favornum="{{card.favorNum}}">
+                            <text class="cuIcon-favorfill lg margin-lr-xs {{card.iscollection? 'text-yellow': 'my-text-gray'}}"></text>
+                        </view>
+                        <text class="lg margin-right-xs text-sm">{{card.favorNum}}</text>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </block>
+
+    <view wx:if="{{cards.length === 0}}" class="myemptyhint margin-top-sm">
+        <view class="text-center">
+            <text class="cuIcon-emoji lg text-orange"></text>
+            <text class="text-orange">该组织还没有发布过活动哟</text>
+        </view>
+    </view>
+
+</scroll-view>
+</view>

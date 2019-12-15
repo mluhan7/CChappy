@@ -1,0 +1,38 @@
+/* pages/loginAdmin/loginAdmin.wxss */
+.login_content{
+    margin: 0;
+    padding-top: 20px;
+}
+.input_area{
+    margin:0 auto;
+    width: 280px;
+    flex-direction: row;
+    border: 1px solid #FFEBCD;
+    border-radius: 5px;
+}
+._login{
+    /*border: 1px solid #808080;*/
+    flex-direction: row;
+    margin-top: 6px;
+    padding: 2px;
+    text-align: center;
+}
+._login{
+    border-bottom: 1px solid #FFEBCD;
+}
+._login image{
+    vertical-align:middle;
+    width: 26px;
+    height: 26px;
+}
+._input{
+    display: inline-block;
+    width: 220px;
+    height: 30px;
+    line-height: 30px;
+    /*border: 1px solid #808080;*/
+    vertical-align:middle;
+}
+#user_password{
+    width: 195px;
+}

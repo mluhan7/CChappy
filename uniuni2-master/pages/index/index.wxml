@@ -1,0 +1,159 @@
+<view id="topBar" style="color:#42436a;">
+    <!--搜索条-->
+    <view>
+        <view>
+            <view class="cu-bar search" style="background:#f6f9ff;">
+                <view bindtap='navToInd' class="cu-avatar round"
+                      style="background-image:url({{myAvatar}});"></view>
+
+                <view class="search-form round">
+                    <text class="cuIcon-search"></text>
+                    <input type="text" placeholder="搜索活动、通知、动态……" confirm-type="search"
+                           bindfocus='navToSearchAct'>
+                    </input>
+                </view>
+
+                <view bindtap="releaseIdea">
+                    <button class="cu-btn icon  round bg-cyan shadow"
+                            style="margin-right: 20rpx;background:#4cd5a7;">
+                        <text class="iconfont icon-fasong text-white lg"></text>
+                    </button>
+                </view>
+
+
+                <view bindtap="navToOrgMag">
+                    <button class="cu-btn icon  round bg-yellow shadow"
+                            style="margin-right: 30rpx;">
+                        <text class="iconfont icon-guanli text-white lg"></text>
+                    </button>
+                </view>
+
+            </view>
+        </view>
+    </view>
+    <!--tab栏-->
+    <scroll-view scroll-x style="background:#f6f9ff;width:calc(100vw - 95rpx);" class="nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+        <view class="cu-item {{index==TabCur?'text-orange cur':''}}" wx:for="{{tabs}}" wx:for-item="tab" wx:key
+              bindtap="tabSelect" data-id="{{index}}" data-tabtitle="{{tab.title}}">
+            {{tab.title}}
+        </view>
+    </scroll-view>
+</view>
+        <!--tab栏右侧按钮-->
+<view class="more-btn">
+    <view bindtap="navToAll">
+        <text class="iconfont icon-gengduo text-orange lg"></text>
+    </view>
+</view>
+
+<scroll-view scroll-y='true' style="height:{{scrollViewHeight}}px;background:#f6f9ff;" enable-back-to-top="true" scroll-top="{{scrolltop}}">
+    <block wx:if="{{tabs[TabCur].cards.length !== 0}}">
+        <!--每个tab页面-->
+        <block wx:for='{{tabs[TabCur].cards}}' wx:for-item="card">
+            <view class="cu-card dynamic padding-bottom-lg" >
+                <view class="cu-item myshadow">
+                    <view class="cu-list menu-avatar">
+                        <view class="cu-item">
+                            <view bindtap='navToOrg'
+                                  data-orgid="{{card.organization_id}}" data-avatar="{{card.avatar}}"
+                                  class="cu-avatar round lg" style="background-image:url({{card.avatar}});"></view>
+                            <view class="content flex-sub">
+                                <view class="text-black">{{card.name}}</view>
+                                <view class="text-gray text-sm flex justify-between">
+                                    {{card.date}}
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+
+                    <view class="text-content"
+                          bindtap="navToActDetail"
+                          data-actid="{{card.id}}"
+                          data-orgname="{{card.name}}"
+                          data-avatar="{{card.avatar}}"
+                          data-date="{{card.date}}"
+                          data-title="{{card.title}}"
+                          data-content="{{card.content}}"
+                          data-viewnum='{{card.viewNum}}'
+                          data-appnum='{{card.appNum}}'
+                          data-favornum='{{card.favorNum}}'
+                          data-isgood='{{card.isgood}}'
+                          data-iscollection='{{card.iscollection}}'
+                          data-index='{{index}}'
+
+                    >
+
+                        <view class="multi-ellipsis--l4 text-black">
+                            <text class="text-orange margin-right-xs">#{{card.title}}#</text>
+                            <text class="text-black">{{card.content}}</text>
+                        </view>
+                    </view>
+                    <view
+                            
+
+                          wx:if='{{card.images[0]}}'
+                          class="grid flex-sub padding-lr col-{{card.colNum}} grid-square">
+                        <view class="bg-img" wx:for='{{card.images}}' style="background-image:url({{item}});">
+                        </view>
+                    </view>
+
+                    <view class="my-text-gray text-right padding myicons" style="font-size:32rpx;padding:8rpx 30rpx 10rpx 0;line-height:40rpx;">
+                        <view>
+                            <text class="cuIcon-attentionfill lg margin-lr-xs {{card.apped ? 'text-yellow': ''}}"></text>
+                        </view>
+                        <text class="lg margin-right-xs text-sm">{{card.viewNum}}</text>
+                        <view bindtap="addGood" data-actid="{{card.id}}" data-isgood='{{card.isgood}}'
+                              data-index="{{index}}" data-appnum="{{card.appNum}}">
+                            <text class="cuIcon-appreciatefill lg margin-lr-xs {{card.isgood? 'text-yellow': 'my-text-gray'}}"></text>
+                        </view>
+                        <text class="lg margin-right-xs text-sm">{{card.appNum}}</text>
+                        <view bindtap="addColl" data-actid="{{card.id}}" data-iscollection='{{card.iscollection}}'
+                              data-index="{{index}}" data-favornum="{{card.favorNum}}">
+                            <text class="cuIcon-favorfill lg margin-lr-xs {{card.iscollection? 'text-yellow': 'my-text-gray'}}"></text>
+                        </view>
+                        <text class="lg margin-right-xs text-sm">{{card.favorNum}}</text>
+                    </view>
+                </view>
+            </view>
+
+        </block>
+    </block>
+    <view wx:else class="myemptyhint padding-lr-sm padding-top-sm">
+        <view class="text-center">
+            <text class="cuIcon-emoji lg text-orange"></text>
+            <text class="text-orange"> {{tabs[TabCur].title}} - 暂时还没有社团组织发布活动哟</text>
+        </view>
+    </view>
+</scroll-view>
+
+
+
+        <!--右下角工具箱按钮-->
+<button bindtap="getTools" data-target="bottomModal"
+        class="cu-btn icon button-hover text-xl bg-gradual-orange shadow mytoolsbtn" style="width:100rpx;height:100rpx;">
+    <text class="iconfont icon-tool-cabinet_icon text-white"></text>
+</button>
+
+<button bindtap="goTop" data-target="bottomModal"
+        class="cu-btn icon button-hover text-sm bg-gradual-orange shadow mytopbtn" style="width:50rpx;height:50rpx;">
+    <text class="iconfont icon-dingbu text-white text-xs"></text>
+</button>
+
+        <!--弹窗-->
+<view class="cu-modal bottom-modal {{modalName === 'bottomModal'?'show':''}}"
+      bindtap="hideModal">
+    <view class="cu-dialog" catchtap>
+
+        <view class="">
+            <view class="cu-list grid col-{{gridCol}} no-border}}">
+                <view wx:for="{{iconList}}" class="cu-item " wx:key wx:if="{{index<gridCol*2}}"
+                      style="padding: 50rpx 0">
+                    <view class="{{item.icon}} text-{{item.color}} text-xsl"
+                          bindtap="navToFuns" data-funid='{{index}}'>
+                    </view>
+                    <text bindtap="navToFuns" style="color:{{item.color}}" data-funid='{{index}}'>{{item.name}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

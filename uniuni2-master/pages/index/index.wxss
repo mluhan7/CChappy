@@ -1,0 +1,37 @@
+/**index.wxss**/
+.more-btn {
+  position: relative;
+
+}
+.more-btn view {
+  height: 90rpx;
+  width: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  background: #f6f9ff;
+  position: absolute;
+  top: -88rpx;
+  right: 0;
+
+}
+
+.mytab {
+  margin-bottom:20rpx;
+}
+
+.mytoolsbtn {
+  position: fixed;
+  right: 30rpx;
+  bottom: 30rpx;
+}
+.mytopbtn {
+  position: fixed;
+  right: 53rpx;
+  bottom: 150rpx;
+}
+.myemptyhint {
+  display: flex;
+  justify-content: center;
+}
+
+

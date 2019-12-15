@@ -1,0 +1,241 @@
+/* pages/auditing/auditing.wxss */
+.topbar {
+  height: 35px;
+}
+.tabtitle {
+  display: inline-block;
+  margin: 8rpx 61rpx;
+  font-size: 15px;
+}
+.select-t {
+  color: #9966cc;
+  font-weight: 700;
+}
+/*广场*/
+
+.wrapper_s {
+  font-size: 14px;
+  margin-bottom: 15px;
+  height: 40px;
+  width: 100%;
+  
+}
+.form {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 10rpx;
+  display: flex;
+}
+.wrapper_input {
+  flex: 1;
+  background-color: #f6f4f4;
+  margin: 0 12px 4px 0;
+  display: inline-block;
+  box-sizing: border-box;
+  height: 31px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+}
+.icon_s {
+  display: inline-block;
+  float: left;
+  height: 31px;
+  line-height: 31px;
+  width: 5%;
+  margin: 0 4px 0 10px;
+}
+.input_search {
+  float: right;
+  display: inline-block;
+  height: 100%;
+  width: 80%;
+  overflow: hidden; 
+  text-overflow:ellipsis; 
+  white-space: nowrap; 
+}
+.btn_search {
+  display: inline-block;
+  height: 31px;
+  line-height: 31px;
+  font-size: 14px;
+  margin-left: 3px;
+  border-radius: 14px;
+  background: #9966cc;
+  color: white;
+  position: relative;
+  top: -4px;
+}
+.wrapper-inv {
+  width: 100%;
+  margin-bottom: 50rpx;
+}
+.res {
+  /*box-sizing: border-box;*/
+  /*height: 300rpx;*/
+  width: 94%;
+  padding: 18rpx 22rpx;
+  color: white;
+  box-shadow: 0 6px 10px #b5b4b4;
+  border-radius: 10rpx;
+  font-size: 14px;
+  background-color: #9966cc;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+}
+.line1 {
+  /*height: 54rpx;/*18%*/
+  text-align: center;
+  flex: 1;
+}
+.line2 {
+  margin: 10rpx 0;
+  height: 50rpx; 
+  line-height:50rpx;
+  font-size: 16px;
+  text-align: center;
+  /*position:relative;
+  top:-45rpx;*/
+}
+.line3 {
+  max-height: 193rpx;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 3rpx;
+  font-size:27rpx;
+  flex: 1;
+}
+.l3-left {
+  flex: 1;
+}
+.l3-right {
+  min-width: 125rpx;
+  text-align: right;
+}
+
+.tname, .major {
+  color: #282828;
+  background-color: #FFCCFF;
+  height: 25px;
+  line-height: 25px;
+  padding: 1px 5px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.tname {
+  margin-left: 4px;
+}
+.cname {
+  padding:0 12rpx;
+  /*border-bottom:2px solid #ffff33;*/
+  color: #ffff33;
+  font-weight: 700;
+
+}
+.noresult, .notSearch {
+  height: 100%;
+  font-size: 14px;
+}
+/*iconfont*/
+
+
+/**app.wxss**/
+
+.bg-blue {
+  background-color: #add8e6;
+}
+
+.bg-gray {
+  background-color: #e7e4e4;
+}
+
+.bg-green {
+  background-color: #00c777;
+}
+
+.bg-black {
+  background-color: #333;
+}
+
+.t-white {
+  color: white;
+}
+
+.t-green {
+  color: #00c777;
+}
+
+.t-blue {
+  color: #b9dceb;
+}
+
+.t-black {
+  color: #333;
+}
+
+.t-gray {
+  color: gray;
+}
+
+.border-gray {
+  color: #c5c3c3;
+}
+
+.hint {
+  margin-top: 5px;
+  text-align: right;
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+/*甜甜圈loading start*/
+
+@keyframes donut-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.donut {
+  height: 60rpx;
+  width: 60rpx;
+  border: 4rpx solid #333;
+  border-radius: 50%;
+  animation: donut-spin 0.5s linear infinite;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+
+.flex-mid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+/*覆盖*/
+
+button::after {
+  border: none;
+  margin: 0;
+}
+

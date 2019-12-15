@@ -1,0 +1,30 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/ideaDetail/ideaDetail",
+    "pages/releaseIdea/releaseIdea",
+    "pages/auditing/auditing",
+    "pages/index/index",
+    "pages/freeroom/freeroom",
+    "pages/orgMag/orgMag",
+    "pages/loginAdmin/loginAdmin",
+    "pages/login/login",
+    "pages/editAct/editAct",
+    "pages/releaseAct/releaseAct",
+    "pages/allorgs/allorgs",
+    "pages/mark/mark",
+    "pages/access_gc/access_gc",
+    "pages/orgHome/orgHome",
+    "pages/searchAct/searchAct",
+    "pages/actDetail/actDetail",
+    "pages/indHome/indHome"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f8670f",
+    "navigationBarTitleText": "uni有你",
+    "navigationBarTextStyle": "white"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

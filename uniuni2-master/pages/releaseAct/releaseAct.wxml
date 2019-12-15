@@ -1,0 +1,56 @@
+<view style="height:100vh;overflow:hidden;">
+    <!--上面-->
+    <view style="height:20vh;" class="myhint">
+    </view>
+
+    <!--下面-->
+    <view style="height:80vh;position:relative;" class="bg-white mypaper">
+        <!--发送-->
+        <view bindtap='submit' style="" class="myfasong-wraper">
+            <view class="bg-yellow shadow myfasong text-center">
+                <text class="iconfont icon-fasong text-white lg" style="font-size:55rpx;"></text>
+            </view>
+        </view>
+
+        <!--标题-->
+        <view class="padding-lr padding-bottom-sm">
+        <input class="text-black text-lg text-bold text-center" placeholder="动态标题"
+               bindinput="get_title" style="height:80rpx;"></input>
+        </view>
+
+        <!--补充-->
+        <view class="padding-lr">
+            <textarea bindinput	="getTextareaInput" value="{{text}}" auto-height placeholder="活动、通知、想法意见……发表你的动态吧！（最大长度1000字）" class="mytextarea" maxlength="1000"/>
+        </view>
+
+        <!--图片-->
+
+
+        <view>
+            <view class="cu-bar bg-white">
+                <view class="action">
+                    添加图片
+                </view>
+                <view class="action">
+                    {{imgList.length}}/9
+                </view>
+            </view>
+            <scroll-view scroll-y='true' class="cu-form-group padding-top-sm" style="max-height:420rpx;">
+                <view class="grid col-3 grid-square flex-sub">
+                    <view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage"
+                          data-url="{{imgList[index]}}">
+                        <image src='{{imgList[index]}}' mode='aspectFill'></image>
+                        <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+                            <text class="cuIcon-close"></text>
+                        </view>
+                    </view>
+                    <view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<9}}">
+                        <text class="cuIcon-cameraadd"></text>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+
+
+    </view>
+</view>

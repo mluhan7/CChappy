@@ -1,0 +1,49 @@
+<!--<view class="pos-fixed">-->
+
+    <view class="cu-bar my-bg-white search">
+        <view class="search-form radius" style="border:1px solid transparent;border-radius:130rpx;">
+            <text class="cuIcon-search"></text>
+            <input type="text" placeholder="搜索活动、通知、动态……" confirm-type="search" focus="true"
+                   bindinput="bindKeyInput" bindconfirm="doSearch" value="{{inputValue}}">
+
+            </input>
+        </view>
+        <view class="action" bindtap="cleanInput">
+            <text class="cuIcon-close"></text>
+            <text>清除</text>
+        </view>
+    </view>
+
+<!--</view>-->
+
+
+<block wx:if="{{cards.length !== 0}}">
+<block wx:for='{{cards}}' wx:for-item="card">
+
+    <view class="cu-card dynamic no-card solids-bottom" bindtap="navToActDetail">
+        <view class="cu-item shadow">
+            <view class="cu-list menu-avatar">
+                <view class="cu-item"
+                      style="height: 120rpx;padding-top: 30rpx;">
+
+                    <view class="content flex-sub" style="left:30rpx;">
+                        <view class="text-black">{{card.name}}</view>
+                        <view class="text-gray text-sm flex justify-between">
+                            {{card.date}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+
+            <view class="text-content" bindtap="navToActDetail">
+                <view class="multi-ellipsis--l4 text-black">
+                    <text class="text-orange margin-right-xs" wx:if="{{card.title}}">#{{card.title}}#</text>
+                    <text class="text-black">{{card.content}}</text>
+                </view>
+            </view>
+
+        </view>
+    </view>
+
+</block>
+</block>

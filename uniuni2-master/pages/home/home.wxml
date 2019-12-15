@@ -1,0 +1,43 @@
+<!--是否显示圆点，自动播放， 间隔时间， 监听滚动和点击事件-->
+<swiper indicator-dots="true" class="myswiper my-bg-white">
+    <!--swiper-item只能包含一个节点再多会自动删除-->
+    <swiper-item>
+        <view>
+            <image src="https://i.loli.net/2019/12/01/2neLFhYcZIE79sy.png" mode="widthFix" style="width:100%;"></image>
+        </view>
+        <view class="flex justify-center">
+            <text class="text-lg text-bold"><text class="text-orange">uni</text>有你，University Union<text class="text-orange">有你</text></text>
+        </view>
+    </swiper-item>
+    <swiper-item>
+        <view>
+            <image src="https://i.loli.net/2019/12/01/FZGEq6TUhwkX4ax.png" mode="widthFix" style="width:100%;"></image>
+        </view>
+        <view class="flex-sub">
+            <view class="text-lg text-bold text-center">为华中农业大学学生和社团组织</view>
+            <view class="text-lg text-bold text-center">打造的<text class="text-green">全垂直沟通平台</text></view>
+        </view>
+    </swiper-item>
+    <swiper-item>
+        <view>
+            <image src="https://i.loli.net/2019/12/01/rRxsHk75NFcft6O.png" mode="widthFix" style="width:100%;"></image>
+        </view>
+        <view class="flex justify-center">
+            <text class="text-lg text-bold text-red">参与精彩，校园有你</text>
+        </view>
+        <view class="cu-form-group margin-top">
+            <view class="title" style="color:#f16e5c;">我关注的学院/单位</view>
+            <picker mode="selector" bindchange="PickerChange" value="{{index}}" range="{{picker}}">
+                <view class="picker" style="color:#f16e5c;">
+                    {{index?picker[index]:'校部'}}
+                </view>
+            </picker>
+        </view>
+        <view class="padding">
+            <button class='cu-btn block bg-gradual-orange margin-tb-sm lg' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
+                <text>授权进入</text>
+            </button>
+            <view class="text-center padding">授权进入将获取您的qq开放信息。使用该小程序即代表您同意腾讯qq小程序的用户使用协议</view>
+        </view>
+    </swiper-item>
+</swiper>

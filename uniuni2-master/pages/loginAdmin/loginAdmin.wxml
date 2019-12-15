@@ -1,0 +1,83 @@
+<!--pages/loginAdmin/loginAdmin.wxml-->
+<view class="login_content">
+    <form bindsubmit="formSubmit">
+
+        <view class="cu-form-group">
+            <text class="cuIcon-mail  text-gray" style="margin-right: 18rpx;"></text>
+            <input placeholder="申请邮箱（务必真实以接收审核结果）" name="user_email"
+                   value="{{user_email}}" bindinput="emailInput">
+            </input>
+            <text wx:if="{{!email_right}}" class="text-red">请输入正确的邮箱格式！</text>
+
+        </view>
+        <!--组织名-->
+        <view class="cu-form-group">
+            <text class="iconfont icon-xingmingyonghumingnicheng  text-gray" style="margin-right: 18rpx;"></text>
+
+
+            <input placeholder="请输入组织名" name="user_type"
+                   value="{{user_type}}" bindinput="typeInput">
+            </input>
+            <text wx:if="{{!type_right}}" class="text-red">不能带有特殊字符</text>
+        </view>
+        <view class="cu-form-group">
+            <text class="cuIcon-lock  text-gray" style="margin-right: 18rpx;"></text>
+            <input placeholder="请输入密码" name="user_password" password="{{show}}"
+                   value="{{user_password}}" bindinput="pwdInput">
+            </input>
+            <text wx:if="{{!pwd_right}}" class="text-red margin-right-sm">{{pwd_hint}}</text>
+            <text class="{{is_show?'cuIcon-attentionforbidfill':'cuIcon-attentionfill'}} "
+                  bindtap="showPassword"></text>
+        </view>
+        <view class="cu-form-group">
+            <text class="cuIcon-lock  text-gray" style="margin-right: 18rpx;"></text>
+            <input placeholder="请重复密码" name="cf_user_password" password="{{cf_show}}"
+                   value="{{cf_user_password}}"
+                   bindinput="cf_pwdInput">
+
+            </input>
+            <text wx:if="{{!cf_right}}" class="text-red">重复密码时需要与第一次相同！</text>
+            <text class="{{cf_is_show?'cuIcon-attentionforbidfill':'cuIcon-attentionfill'}} "
+                  bindtap="cf_showPassword"></text>
+        </view>
+        <view class="cu-form-group margin-top">
+            <view class="title">组织归属</view>
+            <picker mode="selector" bindchange="PickerChange" value="{{index}}" range="{{picker}}">
+                <view class="picker">
+                    {{index?picker[index]:'选择你所在的学院'}}
+                </view>
+            </picker>
+        </view>
+        <view class="cu-form-group margin-top">
+            <textarea maxlength='500' value="{{text}}" bindinput="textareaAInput" placeholder="请输入你的身份及申请理由"></textarea>
+        </view>
+
+        <view class="cu-bar bg-white margin-top">
+            <view class="action margin-tb-sm margin-right-sm">
+                请上传学生证/校园卡（必）等身份证明材料，它们将作为审核通过的重要依据
+            </view>
+            <view class="action">
+                {{imgList.length}}/9
+            </view>
+        </view>
+        <view class="cu-form-group">
+            <view class="grid col-4 grid-square flex-sub">
+                <view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage"
+                      data-url="{{imgList[index]}}">
+                    <image src='{{imgList[index]}}' mode='aspectFill'></image>
+                    <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+                        <text class="cuIcon-close"></text>
+                    </view>
+                </view>
+                <view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<9}}">
+                    <text class="cuIcon-cameraadd"></text>
+                </view>
+            </view>
+        </view>
+        <view class="margin-tb-lg margin-lr-lg text-center">
+            <button class="cu-btn block bg-purple margin-tb-sm lg button-hover" role="button" aria-disabled="false"
+                    formType="submit">提交申请
+            </button>
+        </view>
+    </form>
+</view>

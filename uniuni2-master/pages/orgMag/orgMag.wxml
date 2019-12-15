@@ -1,0 +1,225 @@
+<view id="topBar">
+    <!--    <view class="flex justify-center"><view class="mgsvg"></view></view>-->
+    <view style="background:#f6f9ff;">
+    <view class="UCenter-bg padding-left-lg">
+        <!--class="UCenter-bg"-->
+
+        <view bindtap='ChooseImage' class="cu-avatar round avatar" style="background-image:url({{org.avatar}});"></view>
+        <view class="text-xl margin-top-xs myname">
+            <text class=" cuIcon-writefill"></text>
+            <view>
+                <input value="{{org.name}}" bindblur="editName" placeholder-style="color:red;" style="width:650rpx;"></input>
+            </view>
+        </view>
+        <view class="text-sm myname" style="margin-bottom:10rpx;">
+            <text class=" cuIcon-write"></text>
+            <view>
+                <input value="{{org.motto}}" bindblur="editMotto" style="width:650rpx;"></input>
+            </view>
+        </view>
+
+<!--        <image src="http://www.triple2.xyz:8088/wave.gif" mode="scaleToFill" class="gif-wave margin-top-lg"></image>-->
+    </view>
+        </view>
+
+    <!--浏览量、收藏量、点赞量-->
+    <view class="padding-top-sm flex text-center text-grey bg-white">
+        <view class="flex flex-sub flex-direction solid-right">
+            <view class="text-xxl text-orange">{{visitTotal}}</view>
+            <view style="margin-top:10rpx;" class="text-sm">
+                <text class="cuIcon-attentionfill"></text> 浏览</view>
+        </view>
+        <view class="flex flex-sub flex-direction solid-right">
+            <view class="text-xxl text-blue">{{starCount}}</view>
+            <view style="margin-top:10rpx;" class="text-sm">
+                <text class="cuIcon-favorfill"></text> 收藏</view>
+        </view>
+        <view class="flex flex-sub flex-direction">
+            <view class="text-xxl text-green">{{watchCount}}</view>
+            <view style="margin-top:10rpx;" class="text-sm">
+                <text class="cuIcon-noticefill"></text>
+                关注
+            </view>
+        </view>
+    </view>
+
+    <scroll-view scroll-x class="bg-white nav text-center ">
+        <view class="cu-item {{index==TabCur?'text-yellow cur':''}}" wx:for="{{list}}" wx:key bindtap="tabSelect"
+              data-id="{{index}}">
+            {{item.title}}
+        </view>
+    </scroll-view>
+</view>
+
+<scroll-view scroll-y='true' style="height:{{scrollViewHeight}}px" enable-back-to-top="true">
+    <!--我的发布页面-->
+    <block wx:if="{{TabCur === 0}}">
+        <block wx:if="{{list[TabCur].cards.length !== 0}}">
+            <block wx:for='{{list[TabCur].cards}}' wx:for-item="card">
+                <view class="cu-card dynamic padding-bottom-lg padding-top-xs">
+                    <view class="cu-item myshadow">
+                        <view class="cu-list menu-avatar">
+                            <view class="cu-item">
+                                <view bindtap='navToOrg'
+                                      data-orgid="{{card.organization_id}}" data-avatar="{{card.avatar}}"
+                                      class="cu-avatar round lg" style="background-image:url({{card.avatar}});"></view>
+                                <view class="content flex-sub" style="width:calc(100% - 296rpx - 20rpx);">
+
+                                    <view class="text-black">{{card.name}}</view>
+                                    <view class="text-gray text-sm flex justify-between">
+                                        {{card.date}}
+                                    </view>
+                                </view>
+                                <view bindtap="showModal" data-target="RadioModal" data-actid="{{card.id}}"
+                                      data-cardindex="{{index}}">
+                                    <text class="cuIcon-more lg text-orange"
+                                          style="font-size:36rpx;margin-right:30rpx;"></text>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="text-content">
+
+                            <view class="multi-ellipsis--l4 text-black"
+                                  catchtap="navToActDetail"
+                                  data-actid="{{card.id}}"
+                                  data-orgname="{{card.name}}"
+                                  data-avatar="{{card.avatar}}"
+                                  data-date="{{card.date}}"
+                                  data-title="{{card.title}}"
+                                  data-content="{{card.content}}"
+                                  data-viewnum='{{card.viewNum}}'
+                                  data-appnum='{{card.appNum}}'
+                                  data-favornum='{{card.favorNum}}'
+                                  data-isgood='{{card.isgood}}'
+                                  data-iscollection='{{card.iscollection}}'
+                                  data-index='{{index}}'>
+                                <text class="text-orange margin-right-xs">#{{card.title}}#</text>
+                                <text class="text-black">{{card.content}}</text>
+                            </view>
+                        </view>
+                        <view
+
+                              wx:if='{{card.images[0]}}'
+                              class="grid flex-sub padding-lr col-{{card.colNum}} grid-square">
+                            <view class="bg-img" wx:for='{{card.images}}' style="background-image:url({{item}});">
+                            </view>
+                        </view>
+
+                        <view class="my-text-gray text-right padding myicons"
+                              style="font-size:32rpx;padding:8rpx 30rpx 10rpx 0;line-height:40rpx;">
+                            <view>
+                                <text class="cuIcon-attentionfill lg margin-lr-xs {{card.apped ? 'text-yellow': ''}}"></text>
+                            </view>
+                            <text class="lg margin-right-xs text-sm">{{card.viewNum}}</text>
+                            <view bindtap="addGood" data-actid="{{card.id}}" data-isgood='{{card.isgood}}'
+                                  data-index="{{index}}" data-appnum="{{card.appNum}}">
+                                <text class="cuIcon-appreciatefill lg margin-lr-xs {{card.isgood? 'text-yellow': 'my-text-gray'}}"></text>
+                            </view>
+                            <text class="lg margin-right-xs text-sm">{{card.appNum}}</text>
+                            <view bindtap="addColl" data-actid="{{card.id}}" data-iscollection='{{card.iscollection}}'
+                                  data-index="{{index}}" data-favornum="{{card.favorNum}}">
+                                <text class="cuIcon-favorfill lg margin-lr-xs {{card.iscollection? 'text-yellow': 'my-text-gray'}}"></text>
+                            </view>
+                            <text class="lg margin-right-xs text-sm">{{card.favorNum}}</text>
+                        </view>
+                    </view>
+                </view>
+
+            </block>
+        </block>
+        <view wx:else class="myemptyhint margin-top-sm">
+            <view class="text-center">
+                <text class="cuIcon-emoji lg text-orange"></text>
+                <text class="text-orange">你还没有发布过活动，点击加号发布活动吧！</text>
+            </view>
+        </view>
+    </block>
+
+    <!--收到的想法页面-->
+    <block wx:if="{{TabCur === 1}}">
+        <block wx:if="{{list[TabCur].cards.length !== 0}}">
+            <block wx:for='{{list[TabCur].cards}}' wx:for-item="card">
+                <view class="cu-card dynamic padding-bottom-lg padding-top-xs"
+                      data-ideaid="{{card.id}}"
+                      data-title="{{card.title}}"
+                      data-content="{{card.content}}"
+                      data-orgs="{{card.orgs}}"
+                      data-index='{{index}}'
+                      bindtap="navToIdeaDetail">
+                    <view class="cu-item myshadow">
+                        <view class="text-xl padding">
+                            <view class="text-black text-bold">{{card.title}}</view>
+                        </view>
+
+                        <view class="text-content">
+                            <view class="van-multi-ellipsis--l3 text-black" style="margin-bottom: 18rpx;">
+                                <text class="text-black multi-ellipsis--l4">{{card.content}}</text>
+                            </view>
+
+                            <scroll-view scroll-x>
+                                <view class="cu-btn sm round line-{{colors[index]}} margin-right-df padding-tb-xs mytag"
+                                      wx:for="{{card.orgs}}" wx:for-item="org">
+                                    <text class="text-sm text-{{colors[index]}}">@{{org}}</text>
+                                </view>
+                            </scroll-view>
+                        </view>
+                        <view wx:if='{{card.image}}'
+                              class="grid flex-sub padding-lr {{isCard?'col-3 grid-square':'col-1'}}"
+                              style="margin-bottom:30rpx;">
+                            <view class="bg-img {{isCard?'':'only-img'}}" style="background-image:url({{card.image}});">
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </block>
+        <view wx:else class="myemptyhint margin-top-sm">
+            <view class="text-center">
+                <text class="cuIcon-emoji lg text-orange"></text>
+                <text class="text-orange">你还没有收到想法哟</text>
+            </view>
+        </view>
+    </block>
+</scroll-view>
+
+        <!--右下角button-->
+<button bindtap="addAct"
+        class="cu-btn icon button-hover text-sl bg-yellow shadow myaddbtn" style="width:100rpx;height:100rpx;">
+    <text class="cuIcon-add text-white"></text>
+</button>
+
+        <!--编辑/删除选项弹窗-->
+<view class="cu-modal {{modalName=='RadioModal'?'show':''}}" bindtap="hideModal">
+    <view class="cu-dialog" catchtap>
+        <view class="cu-list menu">
+            <view class="cu-item" bindtap="editAct">
+                <view class="content">
+                    <text class="cuIcon-edit "></text>
+                    <text class="">编辑</text>
+                </view>
+            </view>
+            <view class="cu-item" bindtap="confirmDelete">
+                <view class="content">
+                    <text class="cuIcon-delete text-red"></text>
+                    <text class="text-red">删除</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+        <!--确认删除弹框-->
+<view class="cu-modal {{confirmDelete ? 'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content text-red">确认删除？</view>
+        </view>
+        <view class="cu-bar bg-white justify-end">
+            <view class="action">
+                <button class="cu-btn line-red text-red" bindtap="deleteD">确认</button>
+                <button class="cu-btn bg-red margin-left" bindtap="cancelDelete">取消</button>
+
+            </view>
+        </view>
+    </view>
+</view>

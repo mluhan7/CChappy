@@ -1,0 +1,38 @@
+<!--pages/login/login.wxml-->
+<view class="login_content">
+    <view class="tips">
+        <view class="flex justify-center"><view class="mgsvg"></view></view>
+
+        <view class="text-xl text-bold" style="margin:30rpx 0 10rpx 0;">登录并管理组织</view>
+    </view>
+    <scroll-view scroll-y="" class="scrollPage">
+        <form bindsubmit="formSubmit">
+            <view class="cu-form-group myitem">
+                <text class="cuIcon-mail text-gray" > </text>
+                <input class="_input" name="user_email" placeholder="请输入邮箱" value="{{user_email}}" bindinput="emailInput">
+                </input>
+                <text wx:if="{{!email_right}}" class="text-red">请输入正确的邮箱格式！</text>
+            </view>
+            <view class="cu-form-group myitem">
+                <text class="cuIcon-lock text-gray"> </text>
+                <input class="_input" name="user_password" placeholder="请输入密码" password="{{show}}"
+                       value="{{user_password}}" bindinput="pwdInput">
+                </input>
+                <text class="{{is_show?'cuIcon-attentionforbidfill':'cuIcon-attentionfill'}} "
+                      bindtap="showPassword"></text>
+            </view>
+            <!--<view class="text-green text-center">忘记密码?</view>-->
+            <view class="flex remember justify-end">
+                <view class="title margin-right-sm text-gray" >记住密码</view>
+                <switch color='#fbbd08' class="sm" checked="{{isrember}}" bindchange="rember"></switch>
+            </view>
+            <view class="flex justify-between margin-lr-lg margin-top-xl">
+                <button class="my-btn bg-purple shadow" bindtap="applyAdmin" style="font-size:30rpx;margin-bottom:16px;">
+                    申请为组织管理员
+                </button>
+                <button class=" my-btn bg-yellow text-white shadow" role="button" aria-disabled="false" formType="submit"
+                style="font-size:30rpx;margin-bottom:16px;">登录</button>
+            </view>
+        </form>
+    </scroll-view>
+</view>

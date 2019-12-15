@@ -1,0 +1,12 @@
+.myavatar {
+    width: 50rpx;
+    height: 50rpx;
+}
+.cu-list.menu-avatar {
+    overflow: initial;
+}
+.myicons {
+    border-top: 1px solid transparent;
+    border-radius:45rpx 45rpx 0 0;
+    box-shadow:0 -20rpx 70rpx 0rpx #e1e5f0;
+}
