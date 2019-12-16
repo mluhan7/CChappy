@@ -18,6 +18,22 @@ Page({
         activity_id: options.actid,
       },
       success() {
+        if(options['orgid']){
+          console.log('请求组织头像');
+          wx.request({
+            url: 'https://www.triple2.xyz:8082/organization/getImage',
+            data: {
+              organization_id: options['orgid']
+            },
+            success(res) {
+              console.log('响应', res.data);
+              that.setData({
+                avatar: res.data[0]
+              })
+            }
+          });
+        }
+
         console.log('访问');
         console.log('opts:', options);
         that.setData({

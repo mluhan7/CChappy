@@ -66,8 +66,14 @@
                                 <view class="content flex-sub" style="width:calc(100% - 296rpx - 20rpx);">
 
                                     <view class="text-black">{{card.name}}</view>
-                                    <view class="text-gray text-sm flex justify-between">
-                                        {{card.date}}
+                                    <view class="flex solid-bottom justify-start">
+                                        <view class="text-gray text-sm flex justify-between" style="margin-right:20rpx;">
+                                            {{card.date}}
+                                        </view>
+                                        <view>
+                                            <text class="cuIcon-attentionfill lg margin-lr-xs {{card.apped ? 'text-yellow': ''}}"></text>
+                                        </view>
+                                        <text class="lg margin-right-xs text-sm">{{card.viewNum}}</text>
                                     </view>
                                 </view>
                                 <view bindtap="showModal" data-target="RadioModal" data-actid="{{card.id}}"
@@ -105,22 +111,21 @@
                             </view>
                         </view>
 
-                        <view class="my-text-gray text-right padding myicons"
-                              style="font-size:32rpx;padding:8rpx 30rpx 10rpx 0;line-height:40rpx;">
-                            <view>
-                                <text class="cuIcon-attentionfill lg margin-lr-xs {{card.apped ? 'text-yellow': ''}}"></text>
+                        <view class="my-text-gray padding myicons flex" style="font-size:40rpx;padding:8rpx 30rpx 10rpx 0;line-height:60rpx;">
+                            <view class="flex-sub flex justify-center">
+                                <view bindtap="addColl" data-actid="{{card.id}}" data-iscollection='{{card.iscollection}}'
+                                      data-index="{{index}}" data-favornum="{{card.favorNum}}">
+                                    <text class="cuIcon-favorfill lg margin-lr-xs {{card.iscollection? 'text-yellow': 'my-text-gray'}}"></text>
+                                </view>
+                                <text class="lg margin-right-xs text-sm">{{card.favorNum}}</text>
                             </view>
-                            <text class="lg margin-right-xs text-sm">{{card.viewNum}}</text>
-                            <view bindtap="addGood" data-actid="{{card.id}}" data-isgood='{{card.isgood}}'
-                                  data-index="{{index}}" data-appnum="{{card.appNum}}">
-                                <text class="cuIcon-appreciatefill lg margin-lr-xs {{card.isgood? 'text-yellow': 'my-text-gray'}}"></text>
+                            <view class="flex-sub flex justify-center">
+                                <view bindtap="addGood" data-actid="{{card.id}}" data-isgood='{{card.isgood}}'
+                                      data-index="{{index}}" data-appnum="{{card.appNum}}">
+                                    <text class="cuIcon-appreciatefill lg margin-lr-xs {{card.isgood? 'text-yellow': 'my-text-gray'}}"></text>
+                                </view>
+                                <text class="lg margin-right-xs text-sm">{{card.appNum}}</text>
                             </view>
-                            <text class="lg margin-right-xs text-sm">{{card.appNum}}</text>
-                            <view bindtap="addColl" data-actid="{{card.id}}" data-iscollection='{{card.iscollection}}'
-                                  data-index="{{index}}" data-favornum="{{card.favorNum}}">
-                                <text class="cuIcon-favorfill lg margin-lr-xs {{card.iscollection? 'text-yellow': 'my-text-gray'}}"></text>
-                            </view>
-                            <text class="lg margin-right-xs text-sm">{{card.favorNum}}</text>
                         </view>
                     </view>
                 </view>

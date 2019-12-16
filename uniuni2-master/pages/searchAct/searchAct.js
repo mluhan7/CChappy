@@ -76,6 +76,7 @@ Page({
           keyword: that.data.inputValue
         },
         success (res) {
+          console.log('find:', res.data);
           wx.hideLoading();
           that.setRes(res.data);
         },
@@ -92,8 +93,24 @@ Page({
     }
   },
   navToActDetail(e) {
+    let actid = e.currentTarget.dataset.actid;
+    let orgname = e.currentTarget.dataset.orgname;
+    let orgid = e.currentTarget.dataset.orgid;
+    let avatar = e.currentTarget.dataset.avatar;
+    let date = e.currentTarget.dataset.date;
+    let title = e.currentTarget.dataset.title;
+    let content = e.currentTarget.dataset.content;
+    let images = e.currentTarget.dataset.images;
+    let viewNum = e.currentTarget.dataset.viewnum;
+    let appNum = e.currentTarget.dataset.appnum;
+    let favorNum = e.currentTarget.dataset.favornum;
+    let isgood = e.currentTarget.dataset.isgood;
+    let iscollection = e.currentTarget.dataset.iscollection;
+    let index = e.currentTarget.dataset.index;
     wx.navigateTo({
-      url: '/pages/actDetail/actDetail'
+      url: '/pages/actDetail/actDetail?actid=' + actid + '&orgname=' + orgname + '&orgid=' + orgid + '&avatar=' + avatar + '&date=' + date
+          + '&title=' + title + '&content=' + content + '&images=' + images + '&viewNum=' + viewNum + '&appNum='
+          + appNum + '&favorNum=' + favorNum + '&isgood=' + isgood + '&iscollection=' + iscollection + '&index=' + index
     });
   },
   // 普通函数
@@ -101,10 +118,18 @@ Page({
     let newCards = [];
     newCards = resdata.map(obj => {
       let newObj = {};
+      newObj['id'] = obj['id'];
+      newObj['organization_id'] = obj['organization_id'];
       newObj['name'] = obj['organization_name'];
       newObj['date'] = utils.dateDiff(Date.parse(obj.time));
       newObj['title'] = obj['title'];
       newObj['content'] = obj['text'];
+      newObj['viewNum'] = obj['page_view'];
+      newObj['appNum'] = obj['good'];
+      newObj['favorNum'] = obj['collection'];
+      // newObj['apped'] = false;
+      newObj['isgood'] = obj['isgood'];
+      newObj['iscollection'] = obj['iscollection'];
       return newObj;
     });
     this.setData({

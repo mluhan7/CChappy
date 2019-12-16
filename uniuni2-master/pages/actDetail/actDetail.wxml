@@ -11,8 +11,14 @@
                     </view>
                     <view class="content flex-sub">
                         <view class="text-black">{{name}}</view>
-                        <view class="text-gray text-sm flex justify-between">
-                            {{date}}
+                        <view class="flex solid-bottom justify-start">
+                            <view class="text-gray text-sm flex justify-between" style="margin-right:20rpx;">
+                                {{date}}
+                            </view>
+                            <view>
+                                <text class="cuIcon-attentionfill lg margin-lr-xs "></text>
+                            </view>
+                            <text class="lg margin-right-xs">{{viewNum}}</text>
                         </view>
                     </view>
                 </view>
@@ -52,19 +58,19 @@
 
 
             <!--点赞行-->
-            <view class="bg-white solid-top text-gray text-lg text-right padding myicons">
-                <view>
-                    <text class="cuIcon-attentionfill lg margin-lr-xs "></text>
+            <view class="my-text-gray padding myicons flex" style="font-size:36rpx;line-height:40rpx;">
+                <view class="flex-sub flex justify-center">
+                    <view bindtap="addGood" data-actid="{{id}}" data-isgood='{{isgood}}' data-appnum="{{appNum}}">
+                        <text class="cuIcon-appreciatefill lg margin-lr-xs {{isgood==='null' || isgood === null?  'text-gray': 'text-yellow'}}"></text>
+                    </view>
+                    <text class="lg margin-right-xs">{{appNum}}</text>
                 </view>
-                <text class="lg margin-right-xs">{{viewNum}}</text>
-                <view bindtap="addGood" data-actid="{{id}}" data-isgood='{{isgood}}' data-appnum="{{appNum}}">
-                    <text class="cuIcon-appreciatefill lg margin-lr-xs {{isgood==='null' || isgood === null?  'text-gray': 'text-yellow'}}"></text>
+                <view class="flex-sub flex justify-center">
+                    <view bindtap="addColl" data-actid="{{id}}" data-iscollection='{{iscollection}}'  data-favornum="{{favorNum}}">
+                        <text class="cuIcon-favorfill lg margin-lr-xs {{iscollection==='null'|| iscollection === null?  'text-gray' : 'text-yellow'}}"></text>
+                    </view>
+                    <text class="lg margin-right-xs">{{favorNum}}</text>
                 </view>
-                <text class="lg margin-right-xs">{{appNum}}</text>
-                <view bindtap="addColl" data-actid="{{id}}" data-iscollection='{{iscollection}}'  data-favornum="{{favorNum}}">
-                    <text class="cuIcon-favorfill lg margin-lr-xs {{iscollection==='null'|| iscollection === null?  'text-gray' : 'text-yellow'}}"></text>
-                </view>
-                <text class="lg margin-right-xs">{{favorNum}}</text>
             </view>
         </view>
     </view>

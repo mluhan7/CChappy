@@ -10,6 +10,7 @@ Page({
     windowHeight: 0,
     myAvatar: '',
     gridCol: 3,
+    scrolltop: 0,
     iconList: [{
       icon: 'iconfont icon-jiaoshikebiao',
       color: 'blue',
@@ -25,85 +26,88 @@ Page({
     }],
     tabs: [
       {
-        title: '最新',
-        cards: [
+        title: '社团',
+        // cards: [
 
-          // {
-          //   id: 0,
-          //   avatar: 'http://www.triple2.xyz:8088/3.jpg',
-          //   name: '华农男生女生墙',
-          //   date: '今天13:58',
-          //   title: '如初',
-          //   content: '人生最好的三个词\n久别重逢，失而复得，虚惊一场\n却唯独没有一个词\n叫和好如初\n和好容易，如初多难啊\n——《你会怎么回忆我们》',
-          //   images: ['http://www.triple2.xyz:8088/3.jpg'],
-          //   viewNum: 19,
-          //   appNum: 10,
-          //   favorNum: 4
-          // },
-          // {
-          //   id: 1,
-          //   avatar: 'http://www.triple2.xyz:8088/3.jpg',
-          //   name: '华农表白墙',
-          //   date: '2019年12月3日',
-          //   title: '欢喜',
-          //   content: 'think about it',
-          //   image: '',
-          //   viewNum: 28,
-          //   appNum: 14,
-          //   favorNum: 2
-          // },
-          // {
-          //   id: 2,
-          //   avatar: 'http://www.triple2.xyz:8088/3.jpg',
-          //   name: '华农生保',
-          //   date: '2019年12月3日',
-          //   title: '欢喜个鬼',
-          //   content: 'hhhhh',
-          //   image: '',
-          //   viewNum: 28,
-          //   appNum: 14,
-          //   favorNum: 2
-          // },
-          // {
-          //   id: 3,
-          //   avatar: 'http://www.triple2.xyz:8088/3.jpg',
-          //   name: '华农男生女生墙',
-          //   date: '2019年12月3日',
-          //   title: '在你身边',
-          //   content: '有没有一个沙雕',
-          //   image: '',
-          //   viewNum: 28,
-          //   appNum: 14,
-          //   favorNum: 2
-          // }
-        ]
+        // {
+        //   id: 0,
+        //   avatar: 'http://www.triple2.xyz:8088/3.jpg',
+        //   name: '华农男生女生墙',
+        //   date: '今天13:58',
+        //   title: '如初',
+        //   content: '人生最好的三个词\n久别重逢，失而复得，虚惊一场\n却唯独没有一个词\n叫和好如初\n和好容易，如初多难啊\n——《你会怎么回忆我们》',
+        //   images: ['http://www.triple2.xyz:8088/3.jpg'],
+        //   viewNum: 19,
+        //   appNum: 10,
+        //   favorNum: 4
+        // },
+        // {
+        //   id: 1,
+        //   avatar: 'http://www.triple2.xyz:8088/3.jpg',
+        //   name: '华农表白墙',
+        //   date: '2019年12月3日',
+        //   title: '欢喜',
+        //   content: 'think about it',
+        //   image: '',
+        //   viewNum: 28,
+        //   appNum: 14,
+        //   favorNum: 2
+        // },
+        // {
+        //   id: 2,
+        //   avatar: 'http://www.triple2.xyz:8088/3.jpg',
+        //   name: '华农生保',
+        //   date: '2019年12月3日',
+        //   title: '欢喜个鬼',
+        //   content: 'hhhhh',
+        //   image: '',
+        //   viewNum: 28,
+        //   appNum: 14,
+        //   favorNum: 2
+        // },
+        // {
+        //   id: 3,
+        //   avatar: 'http://www.triple2.xyz:8088/3.jpg',
+        //   name: '华农男生女生墙',
+        //   date: '2019年12月3日',
+        //   title: '在你身边',
+        //   content: '有没有一个沙雕',
+        //   image: '',
+        //   viewNum: 28,
+        //   appNum: 14,
+        //   favorNum: 2
+        // }
+        // ]
+      },
+      {
+        title: '最新',
       },
       {
         title: '最热',
+        // cards: [
+
+        // {
+        //   id: 1,
+        //   avatar: 'http://www.triple2.xyz:8088/3.jpg',
+        //   name: '华农表白墙',
+        //   date: '2019年12月3日',
+        //   title: '欢喜',
+        //   content: 'think about it',
+        //   image: '',
+        //   viewNum: 28,
+        //   appNum: 14,
+        //   favorNum: 2
+        // }
+        // ]
       },
       {
         title: '关注',
-        cards: [
-
-          // {
-          //   id: 1,
-          //   avatar: 'http://www.triple2.xyz:8088/3.jpg',
-          //   name: '华农表白墙',
-          //   date: '2019年12月3日',
-          //   title: '欢喜',
-          //   content: 'think about it',
-          //   image: '',
-          //   viewNum: 28,
-          //   appNum: 14,
-          //   favorNum: 2
-          // }
-        ]
+      },
+      {
+        title: '关注单位',
       },
       {
         title: '校部',
-      },
-      {
-        title: '社团',
       },
       {
         title: '工学院',
@@ -158,13 +162,21 @@ Page({
       },]
   },
   //事件处理函数
+  viewScroll(e) {
+    let that = this;
+    // console.log('scrollTop:', e.detail.scrollTop);
+    // if()
+    that.setData({
+      scrolltop: e.detail.scrollTop
+    });
+  },
   goTop(e) {
     let that = this;
     that.setData({
       scrolltop: 0
     })
   },
-  goTab(){
+  goTab() {
     let that = this;
     wx.showLoading({
       title: '数据加载中'
@@ -181,8 +193,7 @@ Page({
           // console.log(res.data);
           wx.hideLoading();
           that.setRes(res.data);
-          console.log(that.data.tabs[that.data.TabCur].cards);
-          console.log(that.data.tabs[that.data.TabCur].cards.length === 0);
+          that.emptyCards();
         },
         fail(res) {
           console.log('fail');
@@ -200,6 +211,7 @@ Page({
             wx.hideLoading();
             // console.log(res.data);
             that.setRes(res.data);
+            that.emptyCards();
           }
         })
       } else {
@@ -214,6 +226,7 @@ Page({
         success(res) {
           wx.hideLoading();
           that.setRes(res.data);
+          that.emptyCards();
         },
         fail(res) {
           console.log('fail');
@@ -230,14 +243,46 @@ Page({
           wx.hideLoading();
           // console.log(res.data);
           that.setRes(res.data);
+          that.emptyCards();
         },
         fail(res) {
           console.log('test fail');
         }
       });
-      that.setData({
-        myAvatar: app.globalData.avatarUrl
-      })
+
+    }
+  },
+  emptyCards() {
+    let that = this;
+    if(that.data.tabs[that.data.TabCur].cards instanceof Array
+        && that.data.tabs[that.data.TabCur].cards.length >=1) {
+      console.log('数组有效');
+    }else {
+      console.log('数组无效');
+      console.log(that.data.tabs[that.data.TabCur].cards);
+      setTimeout(()=>{
+        console.log('setTimeout');
+        // console.log(that.data.tabs);
+        that.setData({
+          TabCur: 1,
+          scrollLeft: 0
+        });
+        wx.request({
+          url: 'https://www.triple2.xyz:8082/activity/new', //仅为示例，并非真实的接口地址
+          data: {
+            user_id: app.globalData.userid
+          },
+          success(res) {
+            wx.hideLoading();
+            // console.log(res.data);
+            that.setRes(res.data);
+          },
+          fail(res) {
+            console.log('test fail');
+          }
+        });
+      }, 1000);
+
     }
   },
   tabSelect(e) {
@@ -320,8 +365,7 @@ Page({
     let funid = e.currentTarget.dataset.funid;
     if (funid == 0) {
       this.navToFreeroom()
-    }
-    else if(funid == 1) {
+    } else if (funid == 1) {
       this.navToAuditing()
     }
   },
@@ -377,8 +421,7 @@ Page({
           });
         }
       })
-    }
-    else {
+    } else {
       wx.request({
         url: 'https://www.triple2.xyz:8082/collection/cancel',
         data: {
@@ -480,6 +523,9 @@ Page({
   onLoad: function () {
     console.log('当前用户：', app.globalData.userid);
     let that = this;
+    that.setData({
+      myAvatar: app.globalData.avatarUrl
+    });
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
@@ -505,32 +551,49 @@ Page({
       title: '数据加载中',
       icon: 'Loading'
     });
-    let newtab = {
-      title: app.globalData.college
-    };
+
+    let delindex;
     let tabs = that.data.tabs;
-    tabs.unshift(newtab);
-    that.setData({
-      tabs: tabs
-    });
-    wx.request({
-      url: 'https://www.triple2.xyz:8082/activity/findtype', //仅为示例，并非真实的接口地址
-      data: {
-        type: that.data.tabs[0].title,
-        // type: '信息学院',
-        user_id: app.globalData.userid
-      },
-      success(res) {
-        // console.log(res.data);
-        wx.hideLoading();
-        that.setRes(res.data);
-        // console.log(that.data.tabs[that.data.TabCur].cards);
-        // console.log(that.data.tabs[that.data.TabCur].cards.length === 0);
-      },
-      fail(res) {
-        console.log('fail');
+    console.log('newtab-college', app.globalData.college);
+    if (tabs instanceof Array) {
+      let newtab = tabs.find(function (value, index) {
+        delindex = index;
+        return value.title === app.globalData.college;
+      });
+      console.log('newtab:', newtab);
+      if (delindex) {
+        tabs.splice(delindex, 1);
+      } else {
+        console.log('delindex不存在');
       }
-    })
+      tabs.splice(4, 1, newtab);
+
+      that.setData({
+        tabs: tabs
+      });
+    } else {
+      console.log('find失败')
+    }
+
+    that.goTab();
+    // wx.request({
+    //   url: 'https://www.triple2.xyz:8082/activity/findtype', //仅为示例，并非真实的接口地址
+    //   data: {
+    //     type: that.data.tabs[0].title,
+    //     // type: '信息学院',
+    //     user_id: app.globalData.userid
+    //   },
+    //   success(res) {
+    //     // console.log(res.data);
+    //     wx.hideLoading();
+    //     that.setRes(res.data);
+    //     // console.log(that.data.tabs[that.data.TabCur].cards);
+    //     // console.log(that.data.tabs[that.data.TabCur].cards.length === 0);
+    //   },
+    //   fail(res) {
+    //     console.log('fail');
+    //   }
+    // })
 
     // wx.request({
     //   url: 'https://www.triple2.xyz:8082/activity/new', //仅为示例，并非真实的接口地址
@@ -550,44 +613,49 @@ Page({
       myAvatar: app.globalData.avatarUrl
     })
   },
-  onShow(){
+  onShow() {
     let that = this;
-    let newtab = {
-      title: app.globalData.college
-    };
     let tabs = that.data.tabs;
-    tabs.splice(0, 1, newtab);
-    that.setData({
-      tabs: tabs
+    let swapindex;
+    let newtab = tabs.find(function (value, index) {
+      swapindex = index;
+      return value.title === app.globalData.college;
     });
-
-    that.goTab();
+    if (swapindex) {
+      let swaptab = tabs[4];
+      tabs[4] = tabs[swapindex];
+      tabs[swapindex] = swaptab;
+      that.setData({
+        tabs: tabs
+      });
+      that.goTab();
+    }
   },
   // 下拉刷新
-  onPullDownRefresh: function () {
-    var that =this;
-    // 显示顶部刷新图标
-    wx.showNavigationBarLoading();
-    wx.request({
-      url: 'https://www.triple2.xyz:8082/activity/new', //仅为示例，并非真实的接口地址
-      data: {
-        user_id: app.globalData.userid
-      },
-      success(res) {
-        wx.hideLoading();
-        // console.log(res.data);
-        that.setRes(res.data);
-      },
-      fail(res) {
-        console.log('test fail');
-      }
-    });
-    console.log(that.data.moment);
-        // 隐藏导航栏加载框
-    wx.hideNavigationBarLoading();
-        // 停止下拉动作
-    wx.stopPullDownRefresh();
-  },
+  // onPullDownRefresh: function () {
+  //   var that =this;
+  //   // 显示顶部刷新图标
+  //   wx.showNavigationBarLoading();
+  //   wx.request({
+  //     url: 'https://www.triple2.xyz:8082/activity/new', //仅为示例，并非真实的接口地址
+  //     data: {
+  //       user_id: app.globalData.userid
+  //     },
+  //     success(res) {
+  //       wx.hideLoading();
+  //       // console.log(res.data);
+  //       that.setRes(res.data);
+  //     },
+  //     fail(res) {
+  //       console.log('test fail');
+  //     }
+  //   });
+  //   console.log(that.data.moment);
+  //       // 隐藏导航栏加载框
+  //   wx.hideNavigationBarLoading();
+  //       // 停止下拉动作
+  //   wx.stopPullDownRefresh();
+  // },
   /**
    * 用户点击右上角分享
    */

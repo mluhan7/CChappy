@@ -44,16 +44,17 @@ Page({
           console.log(res.data);
           app.globalData.college = res.data;
           console.log('从缓存的userid获得关注college');
+          // app.globalData.college = userData.college;
+          console.log('appdata:', app.globalData);
+          wx.reLaunch({
+            url: '/pages/index/index',
+          })
         },
         fail(res) {
           console.log('获取college失败');
         }
       });
-      // app.globalData.college = userData.college;
-      console.log('appdata:', app.globalData);
-      wx.reLaunch({
-        url: '/pages/index/index',
-      })
+
     } else {
       console.log('获取userid缓存失败');
     }

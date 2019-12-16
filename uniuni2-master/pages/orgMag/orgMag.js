@@ -450,7 +450,7 @@ Page({
     let that = this;
     wx.chooseImage({
       count: 1, //默认9
-      sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
+      sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], //从相册选择
       success: (res) => {
         this.setData({

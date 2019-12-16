@@ -233,6 +233,21 @@ Page({
             [target]: cards
           })
         }
+        //判断该组织是否发布了活动，未发布活动则跳到首页
+        if(that.data.cards.length === 0){
+          wx.showToast({
+            title: '该组织未发布动态哦~即将跳转到首页',
+            icon: '',
+            image: '',
+            duration: 1500,
+            mask: true,
+            success: function(res) {
+              setTimeout(function() {
+                wx.navigateTo({url: '/pages/index/index'});
+              }, 1500)
+            },
+          })
+        }
       },
       fail(res) {
         console.log('getActImages fail');
